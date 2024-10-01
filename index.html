@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гра: Вгадай число</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: blanchedalmond;
+            padding: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Гра: Вгадай число!</h1>
+    <p>Я загадав число від 1 до 10. Спробуй вгадати його!</p>
+    <button id="start-game">Почати гру</button>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('start-game').onclick = function() {
+            const randomNumber = Math.floor(Math.random() * 10) + 1; // Випадкове число від 1 до 10
+            let guess;
+            let attempts = 0; // Лічильник спроб
+
+            // Цикл while для вгадування
+            while (guess !== randomNumber) {
+                guess = parseInt(prompt("Введіть число від 1 до 10:"));
+
+                if (isNaN(guess) || guess < 1 || guess > 10) {
+                    alert("Будь ласка, введіть число в межах від 1 до 10.");
+                    continue; // Пропустити цю ітерацію циклу
+                }
+
+                attempts++;
+
+                if (guess < randomNumber) {
+                    alert("Загадане число більше. Спробуйте ще раз.");
+                } else if (guess > randomNumber) {
+                    alert("Загадане число менше. Спробуйте ще раз.");
+                } else {
+                    alert(`Вітаємо! Ви вгадали число ${randomNumber} за ${attempts} спроби!`);
+                    document.getElementById('result').textContent = `Ви вгадали число ${randomNumber} за ${attempts} спроби.`;
+                }
+            }
+        };
+    </script>
+</body>
+</html>
